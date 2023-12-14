@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { UserButton } from "@clerk/nextjs";
 
-export default function Home() {
-  return <p className="">Only authenticated users can see this</p>;
+export default function Page() {
+  return (
+    <div className="">
+      <h1 className="">Dashboard</h1> <UserButton afterSignOutUrl="/" />
+    </div>
+  );
 }
-
-//41:58
