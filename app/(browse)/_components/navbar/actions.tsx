@@ -3,6 +3,7 @@ import { Clapperboard } from "lucide-react";
 import { SignInButton, UserButton, currentUser } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
+import { neobrutalism } from "@clerk/themes";
 
 export const Actions = async () => {
   const user = await currentUser();
@@ -10,7 +11,7 @@ export const Actions = async () => {
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
       {!user && (
-        <SignInButton>
+        <SignInButton mode="modal">
           <Button size="sm" variant="primary">
             Login
           </Button>
