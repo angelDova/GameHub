@@ -7,6 +7,8 @@ import { Stream, User } from "@prisma/client";
 import Video from "./video";
 import { cn } from "@/lib/utils";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
+import { Chat } from "./chat";
+import { ChatToggle } from "./chat-toggle";
 
 interface StreamPlayerProps {
   user: User & { stream: Stream | null };
@@ -25,6 +27,11 @@ const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) => {
 
   return (
     <>
+      {collapsed && (
+        <div className="hidden lg:block fixed top-[100px] right-2 z-50">
+          <ChatToggle />
+        </div>
+      )}
       <LiveKitRoom
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
@@ -36,11 +43,20 @@ const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) => {
         <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
           <Video hostName={user.username} hostIdentity={user.id} />
         </div>
+        <div className={cn("col-span-1", collapsed && "hidden")}>
+          <Chat
+            viewerName={name}
+            hostName={user.username}
+            hostIdentity={user.id}
+            isFollowing={isFollowing}
+            isChatEnabled={stream.isChatEnabled}
+            isChatDelayed={stream.isChatDelayed}
+            isChatFollowersOnly={stream.isChatFollowersOnly}
+          />
+        </div>
       </LiveKitRoom>
     </>
   );
 };
 
 export default StreamPlayer;
-
-// 1.55.37
