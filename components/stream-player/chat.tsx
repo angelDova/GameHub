@@ -12,6 +12,8 @@ import { useEffect, useMemo, useState } from "react";
 import { match } from "assert";
 import { ChatHeader } from "./chat-header";
 import { ChatForm } from "./chat-form";
+import { ChatList } from "./chat-list";
+import { ChatCommunity } from "./chat-community";
 
 interface ChatProps {
   hostName: string;
@@ -70,6 +72,7 @@ export const Chat = ({
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>
+          <ChatList messages={reversedMessages} isHidden={isHidden} />
           <ChatForm
             onSubmit={onSubmit}
             value={value}
@@ -82,9 +85,11 @@ export const Chat = ({
         </>
       )}
       {variant === ChatVariant.COMMUNITY && (
-        <>
-          <p className="">Community</p>
-        </>
+        <ChatCommunity
+          viewerName={viewerName}
+          hostName={hostName}
+          isHidden={isHidden}
+        />
       )}
     </div>
   );
