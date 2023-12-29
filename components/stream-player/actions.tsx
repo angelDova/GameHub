@@ -69,7 +69,10 @@ export const Actions = ({
       className="w-full lg:w-auto"
     >
       <Heart
-        className={cn("h-4 w-4 mr-2", isFollowing ? "fill-white" : "fill-none")}
+        className={cn(
+          "h-4 w-4 mr-2 hover:animate-pulse",
+          isFollowing ? "fill-white" : "fill-none"
+        )}
       />
       {isFollowing ? "Unfollow" : "Follow"}
     </Button>
