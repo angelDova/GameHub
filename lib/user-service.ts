@@ -7,6 +7,11 @@ export const getUserByUsername = async (username: string) => {
     },
     include: {
       stream: true,
+      _count: {
+        select: {
+          followedBy: true,
+        },
+      },
     },
     // select: {
     //   id: true,
@@ -23,11 +28,6 @@ export const getUserByUsername = async (username: string) => {
     //       isChatFollowersOnly: true,
     //       thumbnailUrl: true,
     //       name: true,
-    //     },
-    //   },
-    //   _count: {
-    //     select: {
-    //       followedBy: true,
     //     },
     //   },
     // },
