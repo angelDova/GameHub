@@ -1,27 +1,51 @@
 "use client";
 
-import { UseViewerToken } from "@/hooks/use-viewer-token";
-
-import { LiveKitRoom } from "@livekit/components-react";
 import { Stream, User } from "@prisma/client";
-import Video, { VideoSkeleton } from "./video";
+import { LiveKitRoom } from "@livekit/components-react";
+
 import { cn } from "@/lib/utils";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
-import { Chat, ChatSkeleton } from "./chat";
-import { ChatToggle } from "./chat-toggle";
-import { Header, HeaderSkeleton } from "./header";
+
 import { InfoCard } from "./info-card";
 import { AboutCard } from "./about-card";
+import { ChatToggle } from "./chat-toggle";
+import { Chat, ChatSkeleton } from "./chat";
+
+import { Header, HeaderSkeleton } from "./header";
+import { UseViewerToken } from "@/hooks/use-viewer-token";
+import Video, { VideoSkeleton } from "./video";
+
+type CustomStream = {
+  id: string;
+  isChatEnabled: boolean;
+  isChatDelayed: boolean;
+  isChatFollowersOnly: boolean;
+  isLive: boolean;
+  thumbnailUrl: string | null;
+  name: string;
+};
+
+type CustomUser = {
+  id: string;
+  username: string;
+  bio: string | null;
+  stream: CustomStream | null;
+  imageUrl: string;
+  _count: { followedBy: number };
+};
 
 interface StreamPlayerProps {
-  user: User & { stream: Stream | null; _count: { followedBy: number } };
-  stream: Stream;
+  user: CustomUser;
+  stream: CustomStream;
   isFollowing: boolean;
 }
 
-const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) => {
+export const StreamPlayer = ({
+  user,
+  stream,
+  isFollowing,
+}: StreamPlayerProps) => {
   const { token, name, identity } = UseViewerToken(user.id);
-
   const { collapsed } = useChatSidebar((state) => state);
 
   if (!token || !name || !identity) {
@@ -82,8 +106,6 @@ const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) => {
     </>
   );
 };
-
-export default StreamPlayer;
 
 export const StreamPlayerSkeleton = () => {
   return (
