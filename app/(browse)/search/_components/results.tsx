@@ -41,5 +41,3 @@ export const ResultsSkeleton = () => {
     </div>
   );
 };
-
-//6.15.04
