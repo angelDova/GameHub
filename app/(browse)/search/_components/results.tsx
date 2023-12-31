@@ -17,7 +17,7 @@ export const Results = async ({ term }: ResultsProps) => {
       </h2>
       {data.length === 0 && (
         <p className="text-muted-foreground text-sm">
-          No results found. Try searching for something else
+          No results found. Please try searching for something else
         </p>
       )}
       <div className="flex flex-col gap-y-4">
@@ -41,3 +41,5 @@ export const ResultsSkeleton = () => {
     </div>
   );
 };
+
+//6.15.04
