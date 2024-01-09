@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GameHub",
+  title: "Gamehub",
   description: "Streaming Platform for Gamers",
   icons: {
     icon: "/spooky.svg",

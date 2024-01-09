@@ -42,6 +42,7 @@ const CutoutTextLoader = ({
         }}
       >
         Loading...
+        Loading...
       </span>
     </div>
   );
