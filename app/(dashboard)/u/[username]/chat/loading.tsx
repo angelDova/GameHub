@@ -41,7 +41,7 @@ const CutoutTextLoader = ({
           lineHeight: height,
         }}
       >
-        Loading....
+        Loading...
       </span>
     </div>
   );
